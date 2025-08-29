@@ -1,4 +1,4 @@
-# Sistema de Automatização de Manufatura Aditiva
+# Sistema de Automação de Manufatura Aditiva
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Status: Desenvolvimento](https://img.shields.io/badge/Status-Desenvolvimento-orange.svg)]()
