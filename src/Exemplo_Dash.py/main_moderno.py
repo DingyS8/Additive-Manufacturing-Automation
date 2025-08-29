@@ -1,3 +1,6 @@
+import warnings
+warnings.filterwarnings("ignore", category=DeprecationWarning)  # opcional, só pra limpar o terminal
+
 import pandas as pd
 import numpy as np
 from datetime import date
@@ -24,204 +27,15 @@ for ano in anos:
 df = pd.DataFrame(dados, columns=["ano", "categoria", "regiao", "vendas", "receita", "satisfacao"])
 
 # -----------------------------
-# 2) APP (sem tema do dbc)
+# 2) APP
 # -----------------------------
 app = Dash(__name__)
 app.title = "Dashboard de Vendas — UX Clean"
 
 # -----------------------------
-# 2.1) ESTILOS GERAIS (CSS inline)
-# - Paleta minimalista
-# - Tipografia Inter
-# - Cards com sombra e borda arredondada
-# - Dropdown/Slider customizados
-# -----------------------------
-GLOBAL_STYLES = html.Div([
-    # Fonte Inter (Google Fonts)
-    html.Link(href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap",
-              rel="stylesheet"),
-    html.Style("""
-        :root{
-            --bg: #F8F9FA;
-            --card: #FFFFFF;
-            --text: #343A40;
-            --muted: #6C757D;
-            --accent: #6C63FF; /* cor de destaque */
-            --shadow: 0 8px 24px rgba(0,0,0,0.06);
-            --radius: 14px;
-            --radius-sm: 10px;
-            --radius-lg: 20px;
-            --gap: 20px;
-            --gap-lg: 28px;
-        }
-        *{ box-sizing: border-box; }
-        html, body, #react-entry-point, #_dash-app-content, #_dash-app-content > div{
-            height: 100%;
-        }
-        body{
-            margin: 0;
-            font-family: 'Inter', system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-            background: var(--bg);
-            color: var(--text);
-        }
-        .container{
-            max-width: 1280px;
-            margin: 0 auto;
-            padding: 32px 24px 40px;
-        }
-        .title{
-            margin: 0 0 8px 0;
-            font-weight: 700;
-            letter-spacing: -0.2px;
-        }
-        .subtitle{
-            margin: 0 0 24px 0;
-            color: var(--muted);
-            font-weight: 400;
-        }
-        .grid{
-            display: grid;
-            grid-template-columns: repeat(12, 1fr);
-            gap: var(--gap);
-        }
-        .row{ margin-top: var(--gap-lg); }
-
-        /* Card base */
-        .card{
-            background: var(--card);
-            border-radius: var(--radius);
-            box-shadow: var(--shadow);
-            padding: 18px 18px;
-        }
-        .card-header{
-            font-weight: 600;
-            margin-bottom: 10px;
-        }
-        .card-body{ padding-top: 4px; }
-
-        /* KPI Card */
-        .kpi{
-            display: flex;
-            flex-direction: column;
-            gap: 4px;
-        }
-        .kpi-title{
-            font-size: 14px;
-            color: var(--muted);
-            font-weight: 500;
-        }
-        .kpi-value{
-            font-size: 32px;            /* maior destaque */
-            font-weight: 700;
-            line-height: 1.15;
-            display: flex;
-            align-items: baseline;
-            gap: 8px;
-        }
-        .kpi-badge{
-            font-size: 12px;
-            font-weight: 600;
-            color: white;
-            background: var(--accent);
-            padding: 4px 8px;
-            border-radius: 999px;
-            letter-spacing: 0.2px;
-        }
-
-        /* Filtros: labels e controles */
-        .filter-label{
-            font-size: 14px;
-            font-weight: 600;
-            margin-bottom: 8px;
-            display: block;
-        }
-        .filter-card{
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-        }
-
-        /* Dropdown (dcc.Dropdown usa react-select) */
-        .custom-dropdown .Select-control{
-            background: var(--card);
-            border: 1px solid #E7E9EE;
-            border-radius: var(--radius-sm);
-            box-shadow: none;
-        }
-        .custom-dropdown .Select-placeholder,
-        .custom-dropdown .Select-value-label{
-            color: var(--text);
-        }
-        .custom-dropdown .is-open > .Select-control,
-        .custom-dropdown .is-focused:not(.is-open) > .Select-control{
-            border-color: var(--accent);
-            box-shadow: 0 0 0 3px rgba(108,99,255,0.15);
-        }
-        .custom-dropdown .Select-menu-outer{
-            border-radius: var(--radius-sm);
-            border-color: #E7E9EE;
-            box-shadow: var(--shadow);
-        }
-        .custom-dropdown .VirtualizedSelectOption{
-            padding: 10px 12px;
-        }
-        .custom-dropdown .is-focused .VirtualizedSelectFocusedOption{
-            background: rgba(108,99,255,0.08);
-            color: var(--text);
-        }
-
-        /* Slider (rc-slider) */
-        .custom-slider .rc-slider-rail{
-            background: #E7E9EE;
-            height: 6px;
-            border-radius: 999px;
-        }
-        .custom-slider .rc-slider-track{
-            background: var(--accent);
-            height: 6px;
-            border-radius: 999px;
-        }
-        .custom-slider .rc-slider-handle{
-            border: 2px solid var(--accent);
-            width: 18px;
-            height: 18px;
-            margin-top: -6px;
-            background: #fff;
-            box-shadow: 0 2px 8px rgba(108,99,255,0.25);
-        }
-        .custom-slider .rc-slider-dot-active{
-            border-color: var(--accent);
-        }
-
-        /* Gráficos */
-        .graph-card .dash-graph{
-            border-radius: var(--radius);
-            overflow: hidden; /* arredonda "cantos" do canvas */
-        }
-
-        /* Colunas responsivas (grid 12 col) */
-        .col-12{ grid-column: span 12; }
-        .col-6{ grid-column: span 6; }
-        .col-4{ grid-column: span 4; }
-        .col-8{ grid-column: span 8; }
-
-        @media (max-width: 1024px){
-            .col-8{ grid-column: span 12; }
-            .col-4{ grid-column: span 12; }
-        }
-        @media (max-width: 720px){
-            .col-6{ grid-column: span 12; }
-        }
-    """)
-])
-
-# -----------------------------
 # 3) COMPONENTES REUTILIZÁVEIS
 # -----------------------------
 def kpi_card(titulo, valor, unidade=None, id_valor=None):
-    """
-    Cartão de KPI com título, valor grande e badge de unidade.
-    """
     return html.Div(
         className="card",
         children=[
@@ -243,7 +57,6 @@ def kpi_card(titulo, valor, unidade=None, id_valor=None):
 app.layout = html.Div(
     className="container",
     children=[
-        GLOBAL_STYLES,
 
         # Título
         html.H2("📊 Dashboard de Vendas — Exemplo (UX Clean)", className="title"),
@@ -357,13 +170,13 @@ app.layout = html.Div(
 )
 
 # -----------------------------
-# 5) CALLBACKS (com tema Plotly via layout)
+# 5) CALLBACKS (tema Plotly)
 # -----------------------------
 ACCENT = "#6C63FF"
 
 def _apply_fig_theme(fig, showlegend=False):
     fig.update_layout(
-        paper_bgcolor="rgba(0,0,0,0)",     # fundo transparente
+        paper_bgcolor="rgba(0,0,0,0)",
         plot_bgcolor="rgba(0,0,0,0)",
         font=dict(family="Inter, sans-serif", color="#343A40"),
         margin=dict(l=12, r=12, t=8, b=12),
@@ -384,14 +197,12 @@ def _apply_fig_theme(fig, showlegend=False):
     Input("filtro-ano", "value"),
 )
 def atualizar_dashboard(cat, reg, ano):
-    # Filtra por ano e categoria
     dff = df[(df["ano"] == ano)]
     if cat:
         dff = dff[dff["categoria"] == cat]
     if reg and reg != "Todas":
         dff = dff[dff["regiao"] == reg]
 
-    # Evitar DataFrame vazio
     if dff.empty:
         k_receita = "0,00"
         k_vendas = "0"
@@ -408,7 +219,7 @@ def atualizar_dashboard(cat, reg, ano):
     k_vendas = f"{int(dff['vendas'].sum()):,}".replace(",", ".")
     k_satisf = f"{dff['satisfacao'].mean():.2f}"
 
-    # Gráfico 1: Receita por Categoria no ano (considerando filtro de região)
+    # Gráfico 1
     g1 = df[(df["ano"] == ano)]
     if reg and reg != "Todas":
         g1 = g1[g1["regiao"] == reg]
@@ -419,27 +230,26 @@ def atualizar_dashboard(cat, reg, ano):
         y="receita",
         labels={"categoria": "Categoria", "receita": "Receita (R$)"},
         text_auto=".2s",
-        color_discrete_sequence=[ACCENT],   # cor de destaque
+        color_discrete_sequence=[ACCENT],
     )
-    fig1.update_traces(textposition="outside", marker_line_width=0, hovertemplate="<b>%{x}</b><br>R$ %{y:,.2f}<extra></extra>")
+    fig1.update_traces(textposition="outside", marker_line_width=0,
+                       hovertemplate="<b>%{x}</b><br>R$ %{y:,.2f}<extra></extra>")
     fig1.update_layout(xaxis_title=None)
     fig1 = _apply_fig_theme(fig1)
 
-    # Gráfico 2: Top 5 (Categoria/Região) por Receita (no ano)
+    # Gráfico 2
     g2 = df[df["ano"] == ano].copy()
     g2["cat_reg"] = g2["categoria"] + " — " + g2["regiao"]
     g2 = g2.groupby("cat_reg", as_index=False)["receita"].sum().nlargest(5, "receita")
 
     fig2 = px.bar(
-        g2,
-        x="receita",
-        y="cat_reg",
-        orientation="h",
+        g2, x="receita", y="cat_reg", orientation="h",
         labels={"cat_reg": "Categoria — Região", "receita": "Receita (R$)"},
         text_auto=".2s",
         color_discrete_sequence=[ACCENT],
     )
-    fig2.update_traces(marker_line_width=0, hovertemplate="<b>%{y}</b><br>R$ %{x:,.2f}<extra></extra>")
+    fig2.update_traces(marker_line_width=0,
+                       hovertemplate="<b>%{y}</b><br>R$ %{x:,.2f}<extra></extra>")
     fig2.update_layout(yaxis_title=None)
     fig2 = _apply_fig_theme(fig2)
 
@@ -449,5 +259,4 @@ def atualizar_dashboard(cat, reg, ano):
 # 6) MAIN
 # -----------------------------
 if __name__ == "__main__":
-    # Troque host/port conforme necessidade
     app.run(debug=True, host="192.168.100.63", port=8050)
