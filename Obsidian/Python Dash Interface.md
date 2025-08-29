@@ -3,8 +3,9 @@
 ***Como Iniciar***
 
 ```bash
-pip install dash dash-bootstrap-components pandas plotly
+pip install dash dash-bootstrap-components pandas plotly trimesh
 ```
+
 
 ```python
 import pandas as pd

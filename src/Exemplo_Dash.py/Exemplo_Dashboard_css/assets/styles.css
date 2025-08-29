@@ -1,0 +1,181 @@
+/* Fonte Inter (Google Fonts) */
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap");
+
+:root{
+  --bg: #F8F9FA;
+  --card: #FFFFFF;
+  --text: #343A40;
+  --muted: #6C757D;
+  --accent: #6C63FF; /* troque aqui a cor de destaque se quiser */
+  --shadow: 0 8px 24px rgba(0,0,0,0.06);
+  --radius: 14px;
+  --radius-sm: 10px;
+  --radius-lg: 20px;
+  --gap: 20px;
+  --gap-lg: 28px;
+}
+
+*{ box-sizing: border-box; }
+
+html, body, #react-entry-point, #_dash-app-content, #_dash-app-content > div{
+  height: 100%;
+}
+
+body{
+  margin: 0;
+  font-family: 'Inter', system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+}
+
+.container{
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 32px 24px 40px;
+}
+
+.title{
+  margin: 0 0 8px 0;
+  font-weight: 700;
+  letter-spacing: -0.2px;
+}
+
+.subtitle{
+  margin: 0 0 24px 0;
+  color: var(--muted);
+  font-weight: 400;
+}
+
+.grid{
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: var(--gap);
+}
+.row{ margin-top: var(--gap-lg); }
+
+/* Card base */
+.card{
+  background: var(--card);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 18px 18px;
+}
+.card-header{
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+.card-body{ padding-top: 4px; }
+
+/* KPI Card */
+.kpi{
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.kpi-title{
+  font-size: 14px;
+  color: var(--muted);
+  font-weight: 500;
+}
+.kpi-value{
+  font-size: 32px;
+  font-weight: 700;
+  line-height: 1.15;
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+}
+.kpi-badge{
+  font-size: 12px;
+  font-weight: 600;
+  color: white;
+  background: var(--accent);
+  padding: 4px 8px;
+  border-radius: 999px;
+  letter-spacing: 0.2px;
+}
+
+/* Filtros */
+.filter-label{
+  font-size: 14px;
+  font-weight: 600;
+  margin-bottom: 8px;
+  display: block;
+}
+.filter-card{
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+/* Dropdown (react-select) */
+.custom-dropdown .Select-control{
+  background: var(--card);
+  border: 1px solid #E7E9EE;
+  border-radius: var(--radius-sm);
+  box-shadow: none;
+}
+.custom-dropdown .Select-placeholder,
+.custom-dropdown .Select-value-label{
+  color: var(--text);
+}
+.custom-dropdown .is-open > .Select-control,
+.custom-dropdown .is-focused:not(.is-open) > .Select-control{
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(108,99,255,0.15);
+}
+.custom-dropdown .Select-menu-outer{
+  border-radius: var(--radius-sm);
+  border-color: #E7E9EE;
+  box-shadow: var(--shadow);
+}
+.custom-dropdown .VirtualizedSelectOption{
+  padding: 10px 12px;
+}
+.custom-dropdown .is-focused .VirtualizedSelectFocusedOption{
+  background: rgba(108,99,255,0.08);
+  color: var(--text);
+}
+
+/* Slider (rc-slider) */
+.custom-slider .rc-slider-rail{
+  background: #E7E9EE;
+  height: 6px;
+  border-radius: 999px;
+}
+.custom-slider .rc-slider-track{
+  background: var(--accent);
+  height: 6px;
+  border-radius: 999px;
+}
+.custom-slider .rc-slider-handle{
+  border: 2px solid var(--accent);
+  width: 18px;
+  height: 18px;
+  margin-top: -6px;
+  background: #fff;
+  box-shadow: 0 2px 8px rgba(108,99,255,0.25);
+}
+.custom-slider .rc-slider-dot-active{
+  border-color: var(--accent);
+}
+
+/* Gráficos */
+.graph-card .dash-graph{
+  border-radius: var(--radius);
+  overflow: hidden; /* arredonda os cantos do canvas do plotly */
+}
+
+/* Colunas responsivas (grid 12 col) */
+.col-12{ grid-column: span 12; }
+.col-6{ grid-column: span 6; }
+.col-4{ grid-column: span 4; }
+.col-8{ grid-column: span 8; }
+
+@media (max-width: 1024px){
+  .col-8{ grid-column: span 12; }
+  .col-4{ grid-column: span 12; }
+}
+@media (max-width: 720px){
+  .col-6{ grid-column: span 12; }
+}

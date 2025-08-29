@@ -1,0 +1,105 @@
+/* Fonte moderna */
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap");
+
+/* Paleta e tokens */
+:root{
+  --bg: #1a1a1a;        /* fundo da página */
+  --container: #2a2a2a; /* cartões/contêineres */
+  --text: #E0E0E0;      /* texto padrão */
+  --muted: #A8A8A8;     /* texto secundário */
+  --accent: #00C4FF;    /* cor de destaque */
+  --shadow: 0 10px 30px rgba(0,0,0,0.35);
+  --radius: 14px;
+  --radius-lg: 18px;
+  --maxw: 1100px;
+}
+
+/* Reset básico */
+*{ box-sizing: border-box; }
+html, body, #react-entry-point, #_dash-app-content, #_dash-app-content > div{ height: 100%; }
+body{
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: "Inter", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+}
+
+/* Layout centralizado */
+.page{
+  display: flex;
+  justify-content: center;
+}
+.container{
+  width: 100%;
+  max-width: var(--maxw);
+  padding: 32px 20px 40px;
+}
+
+/* Títulos e textos */
+.title{
+  margin: 0 0 6px 0;
+  font-weight: 700;
+  letter-spacing: -0.2px;
+}
+.subtitle{
+  margin: 0 0 18px 0;
+  color: var(--muted);
+}
+
+/* Cartões/contêineres */
+.card{
+  background: var(--container);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 14px;
+  margin-bottom: 18px;
+}
+
+/* Upload destacado */
+.upload-area{
+  width: 100%;
+  height: 96px;
+  line-height: 96px;
+  text-align: center;
+  border: 3px dashed var(--accent); /* mais grossa e com a cor de destaque */
+  border-radius: var(--radius);
+  color: var(--text);
+  background: var(--container);
+  cursor: pointer;
+  user-select: none;
+}
+
+/* Gráfico 3D: cantos arredondados e profundidade */
+.graph-card{
+  padding: 8px;
+  border-radius: var(--radius-lg);
+}
+.graph-card .dash-graph{
+  border-radius: var(--radius-lg);
+  overflow: hidden; /* arredonda o canvas do Plotly */
+}
+
+/* Checklist (checkbox no tema escuro) */
+.controls{ margin: 6px 0 12px; }
+.checklist{
+  color: var(--text);
+  font-weight: 600;
+}
+.checklist input[type="checkbox"]{
+  /* Navegadores modernos suportam accent-color */
+  accent-color: var(--accent);
+  width: 16px;
+  height: 16px;
+  vertical-align: middle;
+  margin-right: 6px;
+}
+
+/* Dica sutil */
+.hint{
+  color: #8B8B8B; /* mais suave que o texto principal */
+  display: inline-block;
+  margin-top: 6px;
+}
+
+/* Links e destaques */
+a, b, strong{ color: var(--accent); }
