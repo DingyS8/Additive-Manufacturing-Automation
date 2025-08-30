@@ -23,8 +23,21 @@
               "icon": "lucide-layout-dashboard",
               "title": "Untitled"
             }
+          },
+          {
+            "id": "e925dbb2e64ff390",
+            "type": "leaf",
+            "state": {
+              "type": "release-notes",
+              "state": {
+                "currentVersion": "1.9.12"
+              },
+              "icon": "lucide-book-up",
+              "title": "Release Notes 1.9.12"
+            }
           }
-        ]
+        ],
+        "currentTab": 1
       }
     ],
     "direction": "vertical"
@@ -163,6 +176,7 @@
   },
   "left-ribbon": {
     "hiddenItems": {
+      "bases:Create new base": false,
       "switcher:Open quick switcher": false,
       "graph:Open graph view": false,
       "canvas:Create new canvas": false,
@@ -171,8 +185,11 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "511d53e2a6f2a41e",
+  "active": "e925dbb2e64ff390",
   "lastOpenFiles": [
+    "docs/Engenharia de Software/Entrega1.pdf",
+    "docs/Engenharia de Software",
+    "docs/Nova pasta",
     "src/Exemplo_Dash.py/Exemplo_3DViewer/3DBenchy.stl",
     "src/Exemplo_Dash.py/Exemplo_3DViewer/assets/style.css",
     "src/Exemplo_Dash.py/Exemplo_3DViewer/assets",
@@ -181,9 +198,6 @@
     "src/Exemplo_Dash.py/Exemplo_Dashboard_css/assets",
     "src/Exemplo_Dash.py/Exemplo_Dashboard_css",
     "src/Exemplo_Dash.py/Exemplo_3DViewer/assests/style.css",
-    "src/Exemplo_Dash.py/Exemplo_3DViewer/assests",
-    "src/Exemplo_Dash.py/Exemplo_3DViewer/main_3d.py",
-    "src/Exemplo_Dash.py/Exemplo_3DViewer",
     "src/Exemplo_Dash.py/Exemplo_Dashboard_css/Pasted image 20250829115514.png",
     "docs/Modelagem de Sistema/Diagrama sem nome.drawio.png",
     "docs/Modelagem de Sistema/Diagrama de sequencia 3.jpeg",

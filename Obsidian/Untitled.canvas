@@ -1,7 +1,7 @@
 {
 	"nodes":[
 		{"id":"dd8b63d4f4fc4599","type":"file","file":"Obsidian/Python Dash Interface.md","x":-700,"y":80,"width":740,"height":540},
-		{"id":"afed7fca6066b0fc","x":-719,"y":-440,"width":778,"height":382,"type":"file","file":"src/Exemplo_Dash.py/Exemplo_Dashboard_css/Pasted image 20250829115514.png"}
+		{"id":"afed7fca6066b0fc","type":"file","file":"src/Exemplo_Dash.py/Exemplo_Dashboard_css/Pasted image 20250829115514.png","x":-719,"y":-440,"width":778,"height":382}
 	],
 	"edges":[
 		{"id":"9a6a2e76463aaa74","fromNode":"afed7fca6066b0fc","fromSide":"bottom","toNode":"dd8b63d4f4fc4599","toSide":"top","color":"6"}
